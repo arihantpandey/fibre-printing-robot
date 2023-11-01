@@ -1,0 +1,29 @@
+global a;
+global b;
+b=1;
+c=1;
+
+global rate;
+ writeDigitalPin(a,'D7',1);
+ writePWMDutyCycle(a,'D9',0.5);
+ pause(0.1);
+
+
+time=0;  % change flow rate ul/hr
+time_2=81.034/100000;
+ writeDigitalPin(a,'D6',0);
+
+ while(c==1)
+     while(b<=1000)
+         writeDigitalPin(a,'D4',1);
+         pause(0.4*time);
+         writeDigitalPin(a,'D4',0);
+         pause(0.4*time);
+         b=b+1;
+         end
+     b=1;
+     writeDigitalPin(a,'D4',1);
+     pause(0.4*time_2);
+     writeDigitalPin(a,'D4',0);
+     pause(0.4*time_2);
+     end

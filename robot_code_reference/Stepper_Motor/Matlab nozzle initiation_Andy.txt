@@ -1,0 +1,23 @@
+clear all;
+global a;
+global b;
+b=0;
+global time;
+time=1;
+a=arduino('COM5','Uno'); % change the COM port
+ configurePin(a,'D6','DigitalOutput');
+ configurePin(a,'D5','DigitalOutput');
+ configurePin(a,'D4','DigitalOutput');
+ configurePin(a,'D7','DigitalOutput');
+configurePin(a,'D9','DigitalOutput');
+ writeDigitalPin(a,'D5',0);
+ writeDigitalPin(a,'D6',0);
+ writeDigitalPin(a,'D7',0);
+ 
+ 
+ configurePin(a,'D7','DigitalOutput');         
+ configurePin(a,'D2','DigitalOutput');
+ configurePin(a,'D3','DigitalOutput');
+ writeDigitalPin(a,'D3',1);
+ writeDigitalPin(a,'D2',1);
+ writeDigitalPin(a,'D7',1);
