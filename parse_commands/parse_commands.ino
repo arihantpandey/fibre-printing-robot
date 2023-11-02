@@ -79,9 +79,9 @@ void loop() {
     } else if (command == "BACK") {
       go_back(SPEED);
     } else if (command == "LEFT") {
-      left_turn(TURN_SPEED);
+      countclockwise(TURN_SPEED);
     } else if (command == "RIGHT") {
-      right_turn(TURN_SPEED);
+      clockwise(TURN_SPEED);
     } else if (command == "STOP") {
       stop_Stop();
     } else if (command.startsWith("PAN:")) {
