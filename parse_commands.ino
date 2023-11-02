@@ -1,3 +1,9 @@
+"""
+This arduino sketch is a basic implementation of the hardware control of the robot.
+It accepts serial commands from the Jetson and commands the motors accordingly.
+This must be updated to transmit camera data and implement feedback control.
+"""
+
 #include <Servo.h>
 
 // Motor control pins
