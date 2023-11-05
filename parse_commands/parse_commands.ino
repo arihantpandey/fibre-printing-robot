@@ -37,8 +37,8 @@ Servo panServo;
 Servo tiltServo;
 
 // Ultrasonic pins
-const int triggerPin = 6; // or another pin if you prefer
-const int echoPin = 7;
+const int triggerPin = 3; // or another pin if you prefer
+const int echoPin = 2;
 
 void setup()
 {
