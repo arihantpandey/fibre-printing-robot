@@ -82,9 +82,8 @@ void loop()
     if (Serial.available() > 0)
     {
         String command = Serial.readStringUntil('\n');
-        command.trim(); // Remove whitespace
+        command.trim();
 
-        // Check the command and act accordingly
         if (command == "FORWARD")
         {
             go_advance(SPEED);
@@ -118,7 +117,7 @@ void loop()
         else if (command == "DISTANCE")
         {
             int distance = getDistance();
-            Serial.println(distance); // Send the distance back to the Jetson
+            Serial.println(distance); 
         }
     }
 }
@@ -133,7 +132,7 @@ int getDistance()
     digitalWrite(triggerPin, LOW);
 
     long duration = pulseIn(echoPin, HIGH);
-    
+
     // Calculating the distance
     int distance = duration * 0.034 / 2;
     return distance;
