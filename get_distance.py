@@ -12,7 +12,7 @@ def read_distance():
         time.sleep(0.5)
         if ser.in_waiting > 0:
             print(ser.readline())
-            distance = ser.readline().decode("utf-8").rstrip()
+            distance = ser.readline().decode("ascii").rstrip()
             print("Distance: ", distance, "cm")
 
 read_distance()
