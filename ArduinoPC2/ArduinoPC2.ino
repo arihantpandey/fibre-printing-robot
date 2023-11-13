@@ -135,7 +135,7 @@ void replyToPC() {
     Serial.print(newServoPos);
     Serial.print(" Time ");
     Serial.print(curMillis >> 9); // divide by 512 is approx = half-seconds
-    Serial.println(">");
+    Serial.println(">"); 
   }
 }
 
