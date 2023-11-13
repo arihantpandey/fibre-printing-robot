@@ -117,6 +117,7 @@ void loop()
         else if (command == "DISTANCE")
         {
             int distance = getDistance();
+            debugToPC("sending dist");
             Serial.println(distance); 
         }
     }

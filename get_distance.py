@@ -9,6 +9,7 @@ ser.flush()
 def read_distance():
     while True:
         ser.write(b"DISTANCE\n")
+        print("DISTANCE")
         time.sleep(0.5)
         if ser.in_waiting() > 0:
             print(ser.readline())
