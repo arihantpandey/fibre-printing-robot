@@ -31,20 +31,25 @@ def on_release(key):
 def read_distance():
     while True:
         ser.write(b"DISTANCE\n")
-        time.sleep(0.25)
+        time.sleep(0.5)
         if ser.in_waiting > 0:
+            print(ser.readline())
             distance = ser.readline().decode("utf-8").rstrip()
             print("Distance: ", distance, "cm")
 
-
-listener = keyboard.Listener(on_press=on_press, on_release=on_release)
-listener.start()
-
 distance_thread = threading.Thread(target=read_distance, daemon=True)
-distance_thread.start()
+
+# Collect events until released
+with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+    distance_thread.start()
+    listener.join()
+
+
+
 
 try:
     while True:
         time.sleep(0.1)
 except KeyboardInterrupt:
+    ser.close()
     pass
