@@ -252,6 +252,16 @@ void commMotors()
         // Serial.println("<command RIGHT>");
         clockwise(TURN_SPEED);
     }
+    else if (strcmp(messageFromPC, "LSHIFT") == 0)
+    {
+        // Serial.println("<command BACKWARD>");
+        left_shift(SPEED, SPEED, SPEED, SPEED);
+    }
+    else if (strcmp(messageFromPC, "RSHIFT") == 0)
+    {
+        // Serial.println("<command BACKWARD>");
+        right_shift(SPEED, SPEED, SPEED, SPEED);
+    }
     else if (strcmp(messageFromPC, "STOP") == 0)
     {
         // Serial.println("<command STOP>");

@@ -7,9 +7,6 @@ def sendToArduino(sendStr):
     ser.write(sendStr.encode("utf-8"))  # change for Python3
 
 
-# ======================================
-
-
 def recvFromArduino():
     global startMarker, endMarker
 
@@ -30,10 +27,6 @@ def recvFromArduino():
 
     return ck
 
-
-# ============================
-
-
 def waitForArduino():
     # wait until the Arduino sends 'Arduino Ready' - allows time for Arduino reset
     # it also ensures that any bytes left over from a previous message are discarded
@@ -50,37 +43,6 @@ def waitForArduino():
         print(msg)  # python3 requires parenthesis
         print()
 
-
-# ======================================
-
-
-def runTest(td):
-    numLoops = len(td)
-    waitingForReply = False
-
-    n = 0
-    while n < numLoops:
-        teststr = td[n]
-
-        if waitingForReply == False:
-            sendToArduino(teststr)
-            print("Sent from PC -- LOOP NUM " + str(n) + " TEST STR " + teststr)
-            waitingForReply = True
-
-        if waitingForReply == True:
-            while ser.inWaiting() == 0:
-                pass
-
-            dataRecvd = recvFromArduino()
-            print("Reply Received  " + dataRecvd)
-            n += 1
-            waitingForReply = False
-
-            print("===========")
-
-        time.sleep(5)
-
-
 def on_press(key):
     try:
         # print(f"Key pressed: {key}")
@@ -96,6 +58,10 @@ def on_press(key):
         elif key == keyboard.Key.right:
             # print("Sending right")
             sendToArduino("<RIGHT,0,0>\n")
+        elif key.char == "a":
+            sendToArduino("<LSHIFT,0,0>\n")
+        elif key.char == "d":
+            sendToArduino("<RSHIFT,0,0>\n")
     except AttributeError:
         pass  # Ignore special keys
 
@@ -129,16 +95,5 @@ listener.start()
 
 # Read from Arduino in a loop
 readFromArduino()
-
-
-# testData = []
-# testData.append("<LED1,200,0.2>")
-# testData.append("<LED1,800,0.7>")
-# testData.append("<LED2,800,0.5>")
-# testData.append("<LED2,200,0.2>")
-# testData.append("<LED1,200,0.7>")
-
-# runTest(testData)
-
 
 ser.close
