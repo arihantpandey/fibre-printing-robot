@@ -48,7 +48,7 @@ float servoFraction = 0.0; // fraction of servo range to move
 unsigned long curMillis;
 
 unsigned long prevReplyToPCmillis = 0;
-unsigned long replyToPCinterval = 1000;
+unsigned long replyToPCinterval = 500;
 
 //=============
 
