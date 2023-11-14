@@ -227,27 +227,30 @@ void replyToPC()
 
 void commMotors()
 {
-    if (strcmp(messageFromPC, "FORWARD"))
+    Serial.print("<command ");
+    Serial.print(messageFromPC);
+    Serial.println(">");
+    if (!strcmp(messageFromPC, "FORWARD"))
     {
         // Serial.println("<command FORWARD>");
         go_advance(SPEED);
     }
-    else if (strcmp(messageFromPC, "BACKWARD"))
+    else if (!strcmp(messageFromPC, "BACKWARD"))
     {
         // Serial.println("<command BACKWARD>");
         go_back(SPEED);
     }
-    else if (strcmp(messageFromPC, "LEFT"))
+    else if (!strcmp(messageFromPC, "LEFT"))
     {
         // Serial.println("<command LEFT>");
         countclockwise(TURN_SPEED);
     }
-    else if (strcmp(messageFromPC, "RIGHT"))
+    else if (!strcmp(messageFromPC, "RIGHT"))
     {
         // Serial.println("<command RIGHT>");
         clockwise(TURN_SPEED);
     }
-    else if (strcmp(messageFromPC, "STOP"))
+    else if (!strcmp(messageFromPC, "STOP"))
     {
         // Serial.println("<command STOP>");
         stop_Stop();
