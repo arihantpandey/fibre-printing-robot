@@ -349,17 +349,17 @@ void moveServo()
 /*motor control*/
 void go_advance(int speed)
 {
-    RL_fwd(speed);
-    RR_fwd(speed);
-    FR_fwd(speed);
-    FL_fwd(speed);
-}
-void go_back(int speed)
-{
     RL_bck(speed);
     RR_bck(speed);
     FR_bck(speed);
     FL_bck(speed);
+}
+void go_back(int speed)
+{
+    RL_fwd(speed);
+    RR_fwd(speed);
+    FR_fwd(speed);
+    FL_fwd(speed);
 }
 void right_shift(int speed_fl_fwd, int speed_rl_bck, int speed_rr_fwd, int speed_fr_bck)
 {
