@@ -98,6 +98,7 @@ void loop()
 {
     curMillis = millis();
     getDataFromPC();
+    commMotors();
     // updateFlashInterval();
     // updateServoPos();
     // replyToPC();
