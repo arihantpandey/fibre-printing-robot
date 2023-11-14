@@ -48,7 +48,7 @@ float servoFraction = 0.0; // fraction of servo range to move
 unsigned long curMillis;
 
 unsigned long prevReplyToPCmillis = 0;
-unsigned long replyToPCinterval = 2000;
+unsigned long replyToPCinterval = 1000;
 
 //=============
 
@@ -162,8 +162,8 @@ void getDataFromPC()
 
         if (readInProgress)
         {
-            Serial.print("Reading: "); // Debug print
-            Serial.println(x);
+            // Serial.print("Reading: "); // Debug print
+            // Serial.println(x);
             inputBuffer[bytesRecvd] = x;
             bytesRecvd++;
             if (bytesRecvd == buffSize)
@@ -234,27 +234,27 @@ void commMotors()
     // }
     if (strcmp(messageFromPC, "FORWARD") == 0)
     {
-        Serial.println("<command FORWARD>");
+        // Serial.println("<command FORWARD>");
         go_advance(SPEED);
     }
     else if (strcmp(messageFromPC, "BACKWARD") == 0)
     {
-        Serial.println("<command BACKWARD>");
+        // Serial.println("<command BACKWARD>");
         go_back(SPEED);
     }
     else if (strcmp(messageFromPC, "LEFT") == 0)
     {
-        Serial.println("<command LEFT>");
+        // Serial.println("<command LEFT>");
         countclockwise(TURN_SPEED);
     }
     else if (strcmp(messageFromPC, "RIGHT") == 0)
     {
-        Serial.println("<command RIGHT>");
+        // Serial.println("<command RIGHT>");
         clockwise(TURN_SPEED);
     }
     else if (strcmp(messageFromPC, "STOP") == 0)
     {
-        Serial.println("<command STOP>");
+        // Serial.println("<command STOP>");
         stop_Stop();
     }
 }
