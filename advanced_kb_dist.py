@@ -113,7 +113,7 @@ def readFromArduino():
             print("Reply Received " + dataRecvd)
 
 serPort = "/dev/ttyACM0"
-baudRate = 9600
+baudRate = 14400
 ser = serial.Serial(serPort, baudRate)
 print("Serial port " + serPort + " opened  Baudrate " + str(baudRate))
 

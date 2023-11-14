@@ -54,7 +54,7 @@ unsigned long replyToPCinterval = 1000;
 
 void setup()
 {
-    Serial.begin(9600);
+    Serial.begin(14400);
 
     delay(500); // delay() is OK in setup as it only happens once
 
