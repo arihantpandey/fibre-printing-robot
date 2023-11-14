@@ -164,6 +164,8 @@ void getDataFromPC()
 
         if (readInProgress)
         {
+            Serial.print("Reading: "); // Debug print
+            Serial.println(x);
             inputBuffer[bytesRecvd] = x;
             bytesRecvd++;
             if (bytesRecvd == buffSize)
@@ -197,6 +199,9 @@ void parseData()
 
     strtokIndx = strtok(NULL, ",");
     servoFraction = atof(strtokIndx); // convert this part to a float
+
+    // Reset messageFromPC after handling the command
+    memset(messageFromPC, 0, sizeof(messageFromPC));
 }
 
 //=============

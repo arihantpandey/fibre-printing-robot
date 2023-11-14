@@ -112,6 +112,7 @@ baudRate = 9600
 ser = serial.Serial(serPort, baudRate)
 print("Serial port " + serPort + " opened  Baudrate " + str(baudRate))
 
+waitForArduino()
 
 startMarker = 60
 endMarker = 62
