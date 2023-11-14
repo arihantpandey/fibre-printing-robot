@@ -98,7 +98,9 @@ void loop()
 {
     curMillis = millis();
     getDataFromPC();
-    commMotors();
+    Serial.print("<command ");
+    Serial.print(messageFromPC);
+    Serial.println(">");
     // updateFlashInterval();
     // updateServoPos();
     // replyToPC();
