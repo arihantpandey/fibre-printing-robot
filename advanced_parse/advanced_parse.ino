@@ -101,7 +101,7 @@ void loop()
     commMotors();
     // updateFlashInterval();
     // updateServoPos();
-    replyToPC();
+    // replyToPC();
     // Reset messageFromPC after handling the command
     // memset(messageFromPC, 0, sizeof(messageFromPC));
     // flashLEDs();
@@ -197,8 +197,6 @@ void parseData()
 
     strtokIndx = strtok(NULL, ",");
     servoFraction = atof(strtokIndx); // convert this part to a float
-
-    
 }
 
 //=============
@@ -228,35 +226,35 @@ void replyToPC()
 
 void commMotors()
 {
-    if (messageFromPC)
+    // if (messageFromPC)
+    // {
+    //     Serial.print("<command ");
+    //     Serial.print(messageFromPC);
+    //     Serial.println(">");
+    // }
+    if (strcmp(messageFromPC, "FORWARD") == 0)
     {
-        Serial.print("<command ");
-        Serial.print(messageFromPC);
-        Serial.println(">");
-    }
-    if (!strcmp(messageFromPC, "FORWARD"))
-    {
-        // Serial.println("<command FORWARD>");
+        Serial.println("<command FORWARD>");
         go_advance(SPEED);
     }
-    else if (!strcmp(messageFromPC, "BACKWARD"))
+    else if (strcmp(messageFromPC, "BACKWARD") == 0)
     {
-        // Serial.println("<command BACKWARD>");
+        Serial.println("<command BACKWARD>");
         go_back(SPEED);
     }
-    else if (!strcmp(messageFromPC, "LEFT"))
+    else if (strcmp(messageFromPC, "LEFT") == 0)
     {
-        // Serial.println("<command LEFT>");
+        Serial.println("<command LEFT>");
         countclockwise(TURN_SPEED);
     }
-    else if (!strcmp(messageFromPC, "RIGHT"))
+    else if (strcmp(messageFromPC, "RIGHT") == 0)
     {
-        // Serial.println("<command RIGHT>");
+        Serial.println("<command RIGHT>");
         clockwise(TURN_SPEED);
     }
-    else if (!strcmp(messageFromPC, "STOP"))
+    else if (strcmp(messageFromPC, "STOP") == 0)
     {
-        // Serial.println("<command STOP>");
+        Serial.println("<command STOP>");
         stop_Stop();
     }
 }
