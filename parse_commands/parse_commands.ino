@@ -118,7 +118,7 @@ void loop()
         {
             int distance = getDistance();
             debugToPC("sending dist");
-            Serial.println(distance); 
+            Serial.println(distance);
         }
     }
 }
