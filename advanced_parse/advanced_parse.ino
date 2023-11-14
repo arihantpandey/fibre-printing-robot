@@ -102,6 +102,8 @@ void loop()
     // updateFlashInterval();
     // updateServoPos();
     replyToPC();
+    // Reset messageFromPC after handling the command
+    // memset(messageFromPC, 0, sizeof(messageFromPC));
     // flashLEDs();
     // moveServo();
 
@@ -196,8 +198,7 @@ void parseData()
     strtokIndx = strtok(NULL, ",");
     servoFraction = atof(strtokIndx); // convert this part to a float
 
-    // Reset messageFromPC after handling the command
-    memset(messageFromPC, 0, sizeof(messageFromPC));
+    
 }
 
 //=============
@@ -227,9 +228,12 @@ void replyToPC()
 
 void commMotors()
 {
-    Serial.print("<command ");
-    Serial.print(messageFromPC);
-    Serial.println(">");
+    if (messageFromPC)
+    {
+        Serial.print("<command ");
+        Serial.print(messageFromPC);
+        Serial.println(">");
+    }
     if (!strcmp(messageFromPC, "FORWARD"))
     {
         // Serial.println("<command FORWARD>");
