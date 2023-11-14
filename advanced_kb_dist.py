@@ -84,13 +84,13 @@ def runTest(td):
 def on_press(key):
     try:
         print(f"Key pressed: {key}")
-        if key.char == "w":
+        if key.char == keyboard.Key.up:
             sendToArduino("<FORWARD,0,0>")
-        elif key.char == "s":
+        elif key.char == keyboard.Key.down:
             sendToArduino("<BACKWARD,0,0>")
-        elif key.char == "a":
+        elif key.char == keyboard.Key.left:
             sendToArduino("<LEFT,0,0>")
-        elif key.char == "d":
+        elif key.char == keyboard.Key.right:
             sendToArduino("<RIGHT,0,0>")
     except AttributeError:
         pass  # Ignore special keys

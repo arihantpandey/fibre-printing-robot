@@ -48,7 +48,7 @@ float servoFraction = 0.0; // fraction of servo range to move
 unsigned long curMillis;
 
 unsigned long prevReplyToPCmillis = 0;
-unsigned long replyToPCinterval = 1000;
+unsigned long replyToPCinterval = 2000;
 
 //=============
 
@@ -86,6 +86,10 @@ void setup()
     pinMode(speedPinLB, OUTPUT);
 
     // Initialize motors to a stopped state
+    digitalWrite(LeftMotorDirPin1, LOW);
+    digitalWrite(LeftMotorDirPin2, LOW);
+    digitalWrite(RightMotorDirPin1, LOW);
+    digitalWrite(RightMotorDirPin2, LOW);
     stop_Stop();
 
     // tell the PC we are ready
@@ -219,24 +223,32 @@ void replyToPC()
 
 void commMotors()
 {
+    Serial.print("<command ");
+    Serial.print(messageFromPC);
+    Serial.println(">");
     if (strcmp(messageFromPC, "FORWARD"))
     {
+        Serial.println("<command FORWARD>");
         go_advance(SPEED);
     }
-    else if (strcmp(messageFromPC, "BACK"))
+    else if (strcmp(messageFromPC, "BACKWARD"))
     {
+        Serial.println("<command BACKWARD>");
         go_back(SPEED);
     }
     else if (strcmp(messageFromPC, "LEFT"))
     {
+        Serial.println("<command LEFT>");
         countclockwise(TURN_SPEED);
     }
     else if (strcmp(messageFromPC, "RIGHT"))
     {
+        Serial.println("<command RIGHT>");
         clockwise(TURN_SPEED);
     }
     else if (strcmp(messageFromPC, "STOP"))
     {
+        Serial.println("<command STOP>");
         stop_Stop();
     }
 }
