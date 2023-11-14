@@ -96,6 +96,8 @@ def on_press(key):
         elif key == keyboard.Key.right:
             print("Sending right")
             sendToArduino("<RIGHT,0,0>\n")
+        else:
+            sendToArduino("<STOP,0,0>\n")
     except AttributeError:
         pass  # Ignore special keys
 
