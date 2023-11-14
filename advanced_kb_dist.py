@@ -83,6 +83,7 @@ def runTest(td):
 
 def on_press(key):
     try:
+        print(f"Key pressed: {key}")
         if key.char == "w":
             sendToArduino("<FORWARD,0,0>")
         elif key.char == "s":
@@ -106,21 +107,6 @@ def readFromArduino():
             dataRecvd = recvFromArduino()
             print("Reply Received " + dataRecvd)
 
-
-# ======================================
-
-# THE DEMO PROGRAM STARTS HERE
-
-# ======================================
-
-import serial
-import time
-
-print()
-print()
-
-# NOTE the user must ensure that the serial port and baudrate are correct
-# serPort = "/dev/ttyS80"
 serPort = "/dev/ttyACM0"
 baudRate = 9600
 ser = serial.Serial(serPort, baudRate)

@@ -217,7 +217,7 @@ void replyToPC()
     }
 }
 
-void commMotors() :
+void commMotors()
 {
     if (strcmp(messageFromPC, "FORWARD"))
     {
