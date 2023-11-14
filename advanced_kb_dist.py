@@ -117,8 +117,8 @@ ser = serial.Serial(serPort, baudRate)
 print("Serial port " + serPort + " opened  Baudrate " + str(baudRate))
 
 
-# startMarker = 60
-# endMarker = 62
+startMarker = 60
+endMarker = 62
 # waitForArduino()
 
 print("listening keyboard")
