@@ -101,7 +101,7 @@ void loop()
     commMotors();
     // updateFlashInterval();
     // updateServoPos();
-    // replyToPC();
+    replyToPC();
     // flashLEDs();
     // moveServo();
 
@@ -208,48 +208,48 @@ void replyToPC()
     if (newDataFromPC)
     {
         newDataFromPC = false;
-        Serial.print("<Msg ");
+        // Serial.print("<Msg ");
+        // Serial.print(messageFromPC);
+        // Serial.print(" NewFlash ");
+        // Serial.print(newFlashInterval);
+        // Serial.print(" SrvFrac ");
+        // Serial.print(servoFraction);
+        // Serial.print(" SrvPos ");
+        // Serial.print(newServoPos);
+        // Serial.print(" Time ");
+        // Serial.print(curMillis >> 9); // divide by 512 is approx = half-seconds
+        // Serial.println(">");
+        Serial.print("<command ");
         Serial.print(messageFromPC);
-        Serial.print(" NewFlash ");
-        Serial.print(newFlashInterval);
-        Serial.print(" SrvFrac ");
-        Serial.print(servoFraction);
-        Serial.print(" SrvPos ");
-        Serial.print(newServoPos);
-        Serial.print(" Time ");
-        Serial.print(curMillis >> 9); // divide by 512 is approx = half-seconds
         Serial.println(">");
     }
 }
 
 void commMotors()
 {
-    Serial.print("<command ");
-    Serial.print(messageFromPC);
-    Serial.println(">");
-    if (strcmp(messageFromPC, "FW"))
+    if (strcmp(messageFromPC, "FORWARD"))
     {
-        Serial.println("<command FORWARD>");
+        // Serial.println("<command FORWARD>");
         go_advance(SPEED);
     }
     else if (strcmp(messageFromPC, "BACKWARD"))
     {
-        Serial.println("<command BACKWARD>");
+        // Serial.println("<command BACKWARD>");
         go_back(SPEED);
     }
     else if (strcmp(messageFromPC, "LEFT"))
     {
-        Serial.println("<command LEFT>");
+        // Serial.println("<command LEFT>");
         countclockwise(TURN_SPEED);
     }
     else if (strcmp(messageFromPC, "RIGHT"))
     {
-        Serial.println("<command RIGHT>");
+        // Serial.println("<command RIGHT>");
         clockwise(TURN_SPEED);
     }
     else if (strcmp(messageFromPC, "STOP"))
     {
-        Serial.println("<command STOP>");
+        // Serial.println("<command STOP>");
         stop_Stop();
     }
 }
