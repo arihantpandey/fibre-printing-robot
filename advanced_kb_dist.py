@@ -121,14 +121,13 @@ startMarker = 60
 endMarker = 62
 waitForArduino()
 
+print("listening keyboard")
 # Keyboard listener
 listener = keyboard.Listener(on_press=on_press, on_release=on_release)
 listener.start()
 
 # Read from Arduino in a loop
 readFromArduino()
-
-# waitForArduino()
 
 
 # testData = []
