@@ -226,7 +226,7 @@ void commMotors()
     Serial.print("<command ");
     Serial.print(messageFromPC);
     Serial.println(">");
-    if (strcmp(messageFromPC, "FORWARD"))
+    if (strcmp(messageFromPC, "FW"))
     {
         Serial.println("<command FORWARD>");
         go_advance(SPEED);

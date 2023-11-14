@@ -85,7 +85,7 @@ def on_press(key):
     try:
         print(f"Key pressed: {key}")
         if key.char == keyboard.Key.up:
-            sendToArduino("<FW,0,0>")
+            sendToArduino("<FORWARD,0,0>")
         elif key.char == keyboard.Key.down:
             sendToArduino("<BACKWARD,0,0>")
         elif key.char == keyboard.Key.left:
