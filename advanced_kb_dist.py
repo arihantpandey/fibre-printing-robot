@@ -84,16 +84,16 @@ def runTest(td):
 def on_press(key):
     try:
         print(f"Key pressed: {key}")
-        if key.char == keyboard.Key.up:
+        if key == keyboard.Key.up:
             print("Sending forward")
             sendToArduino("<FORWARD,0,0>\n")
-        elif key.char == keyboard.Key.down:
+        elif key == keyboard.Key.down:
             print("Sending backward")
             sendToArduino("<BACKWARD,0,0>\n")
-        elif key.char == keyboard.Key.left:
+        elif key == keyboard.Key.left:
             print("Sending left")
             sendToArduino("<LEFT,0,0>\n")
-        elif key.char == keyboard.Key.right:
+        elif key == keyboard.Key.right:
             print("Sending right")
             sendToArduino("<RIGHT,0,0>\n")
     except AttributeError:
