@@ -218,6 +218,9 @@ void replyToPC()
 
 void commMotors() :
 {
+    Serial.print("<command ");
+    Serial.print(messageFromPC);
+    Serial.println(">");
     if (strcmp(messageFromPC, "FORWARD"))
     {
         go_advance(SPEED);

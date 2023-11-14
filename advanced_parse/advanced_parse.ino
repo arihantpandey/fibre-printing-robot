@@ -86,10 +86,6 @@ void setup()
     pinMode(speedPinLB, OUTPUT);
 
     // Initialize motors to a stopped state
-    digitalWrite(LeftMotorDirPin1, LOW);
-    digitalWrite(LeftMotorDirPin2, LOW);
-    digitalWrite(RightMotorDirPin1, LOW);
-    digitalWrite(RightMotorDirPin2, LOW);
     stop_Stop();
 
     // tell the PC we are ready
