@@ -1,7 +1,7 @@
 import serial
 import time
 from pynput import keyboard
-
+import threading
 
 def sendToArduino(sendStr):
     ser.write(sendStr.encode("utf-8"))  # change for Python3
@@ -78,6 +78,16 @@ def readFromArduino():
             dataRecvd = recvFromArduino()
             print("Reply Received " + dataRecvd)
 
+def detect_objects():
+    # Setup DetectNet and process the camera feed
+    # import from compiled jetson-inference library
+    while True:
+        # Run object detection
+        # Communicate results back to the main thread if necessary
+        pass
+
+
+
 serPort = "/dev/ttyACM0"
 baudRate = 14400
 ser = serial.Serial(serPort, baudRate)
@@ -93,7 +103,22 @@ print("listening keyboard")
 listener = keyboard.Listener(on_press=on_press, on_release=on_release)
 listener.start()
 
-# Read from Arduino in a loop
-readFromArduino()
+# Start the object detection thread
+object_detection_thread = threading.Thread(target=detect_objects)
+object_detection_thread.start()
+
+# Start the serial communication thread
+serial_thread = threading.Thread(target=readFromArduino)
+serial_thread.start()
+
+# Keep the main thread running while other threads are active
+try:
+    while True:
+        time.sleep(0.1)
+except KeyboardInterrupt:
+    pass  # Exit the program when Ctrl+C is pressed
 
 ser.close
+
+
+
