@@ -4,12 +4,12 @@ import numpy as np
 # Define the color that needs to be recognized.
 
 #Yellow #FFFF00
-# colorUpper = np.array([44, 255, 255])
-# colorLower = np.array([24, 100, 100])
+colorUpper = np.array([44, 255, 255])
+colorLower = np.array([24, 100, 100])
 
 # # Red FF0000
-colorUpper = np.array([180, 255, 255])
-colorLower = np.array([160, 100, 100])
+#colorUpper = np.array([180, 255, 255])
+#colorLower = np.array([160, 100, 100])
 
 # Green #00FF00
 # colorUpper = np.array([50, 255, 255])
@@ -77,26 +77,26 @@ def centerTargetColor(imageInput):
         cv2.rectangle(imageInput,(int(box_x-radius),int(box_y+radius)),(int(box_x+radius),int(box_y-radius)),(255,255,255),1)
         
         if Y < center_y - error_tor:
-            imageInput = cv2.putText(imageInput,'LOOK UP',(10,50), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(255,255,255),1,cv2.LINE_AA)
+            imageInput = cv2.putText(imageInput,'LOOK UP',(10,50), cv2.FONT_HERSHEY_SIMPLEX, 1,(0,0,0),2,cv2.LINE_AA)
             
         elif Y > center_y + error_tor:
-            imageInput = cv2.putText(imageInput,'LOOK DOWN',(10,50), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(255,255,255),1,cv2.LINE_AA)
+            imageInput = cv2.putText(imageInput,'LOOK DOWN',(10,50), cv2.FONT_HERSHEY_SIMPLEX, 1,(0,0,0),2,cv2.LINE_AA)
 
         else:
-            imageInput = cv2.putText(imageInput,'Y AXIS LOCKED',(10,50), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(255,255,255),1,cv2.LINE_AA)
+            imageInput = cv2.putText(imageInput,'Y AXIS LOCKED',(10,50), cv2.FONT_HERSHEY_SIMPLEX, 1,(0,0,0),2,cv2.LINE_AA)
 
 
         if X < center_x - error_tor:
-            imageInput = cv2.putText(imageInput,'LOOK LEFT',(10,80), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(255,255,255),1,cv2.LINE_AA)
+            imageInput = cv2.putText(imageInput,'LOOK LEFT',(10,80), cv2.FONT_HERSHEY_SIMPLEX, 1,(0,0,0),2,cv2.LINE_AA)
 
         elif X > center_x + error_tor:
-            imageInput = cv2.putText(imageInput,'LOOK RIGHT',(10,80), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(255,255,255),1,cv2.LINE_AA)
+            imageInput = cv2.putText(imageInput,'LOOK RIGHT',(10,80), cv2.FONT_HERSHEY_SIMPLEX, 1,(0,0,0),2,cv2.LINE_AA)
 
         else:
-            imageInput = cv2.putText(imageInput,'X AXIS LOCKED',(10,80), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(255,255,255),1,cv2.LINE_AA)
+            imageInput = cv2.putText(imageInput,'X AXIS LOCKED',(10,80), cv2.FONT_HERSHEY_SIMPLEX, 1,(0,0,0),2,cv2.LINE_AA)
 
     else:
-        imageInput = cv2.putText(imageInput,'Target Detecting',(10,20), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(255,255,255),1,cv2.LINE_AA)
+        imageInput = cv2.putText(imageInput,'Target Detecting',(10,20), cv2.FONT_HERSHEY_SIMPLEX, 1,(0,0,0),2,cv2.LINE_AA)
     
     return imageInput
 
