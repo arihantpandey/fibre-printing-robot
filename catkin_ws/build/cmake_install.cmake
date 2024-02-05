@@ -133,6 +133,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/fpr/fibre-printing-robot/catkin_ws/build/gtest/cmake_install.cmake")
   include("/home/fpr/fibre-printing-robot/catkin_ws/build/ros_deep_learning/cmake_install.cmake")
   include("/home/fpr/fibre-printing-robot/catkin_ws/build/learning_tf/cmake_install.cmake")
+  include("/home/fpr/fibre-printing-robot/catkin_ws/build/urdf_tutorial/cmake_install.cmake")
 
 endif()
 

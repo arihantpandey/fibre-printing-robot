@@ -7,3 +7,4 @@
 subdirs("gtest")
 subdirs("ros_deep_learning")
 subdirs("learning_tf")
+subdirs("urdf_tutorial")

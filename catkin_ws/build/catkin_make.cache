@@ -1,2 +1,2 @@
-learning_tf:ros_deep_learning
+learning_tf:ros_deep_learning:urdf_tutorial
 -DCATKIN_DEVEL_PREFIX=/home/fpr/fibre-printing-robot/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/fpr/fibre-printing-robot/catkin_ws/install -G Unix Makefiles

@@ -135,6 +135,9 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/learning_tf_node.cpp)
+add_executable(turtle_tf_broadcaster src/turtle_tf_broadcaster.cpp)
+add_executable(turtle_tf_listener src/turtle_tf_listener.cpp)
+add_executable(frame_tf_broadcaster src/frame_tf_broadcaster.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -150,7 +153,9 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-
+target_link_libraries(turtle_tf_broadcaster ${catkin_LIBRARIES})
+target_link_libraries(turtle_tf_listener ${catkin_LIBRARIES})
+target_link_libraries(frame_tf_broadcaster ${catkin_LIBRARIES})
 #############
 ## Install ##
 #############
