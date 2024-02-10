@@ -13,6 +13,3 @@ feb3c24912ed65e5d55e2ff708457d71 /home/fpr/fibre-printing-robot/catkin_ws/devel/
 4236d5ada81cbfbba8b1e1f27c596222 /home/fpr/fibre-printing-robot/catkin_ws/devel/share/roseus/ros/beginner_tutorials/msg/Num.l
 deeb732e9ab2f23f0d28945b91f51a6c /home/fpr/fibre-printing-robot/catkin_ws/devel/share/roseus/ros/beginner_tutorials/srv/AddTwoInts.l
 4860a2c6ffa57b41be72949a45910c72 CMakeFiles/clean_test_results
-d3f6926bb9dcfdd542a62d29ccc1d965 urdf_tutorial/CMakeFiles/_run_tests_urdf_tutorial_roslaunch-check_launch
-a71639ec8f27ccf28e5b3e7232f1b997 urdf_tutorial/CMakeFiles/clean_test_results_urdf_tutorial
-d3f6926bb9dcfdd542a62d29ccc1d965 urdf_tutorial/CMakeFiles/run_tests_urdf_tutorial_roslaunch-check_launch

@@ -131,9 +131,9 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/fpr/fibre-printing-robot/catkin_ws/build/gtest/cmake_install.cmake")
+  include("/home/fpr/fibre-printing-robot/catkin_ws/build/color_target_tracker/cmake_install.cmake")
   include("/home/fpr/fibre-printing-robot/catkin_ws/build/ros_deep_learning/cmake_install.cmake")
   include("/home/fpr/fibre-printing-robot/catkin_ws/build/learning_tf/cmake_install.cmake")
-  include("/home/fpr/fibre-printing-robot/catkin_ws/build/urdf_tutorial/cmake_install.cmake")
 
 endif()
 
