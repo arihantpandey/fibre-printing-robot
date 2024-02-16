@@ -1,0 +1,13 @@
+<launch>
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find color_target_tracker)/urdf/simple_actuator.urdf'" />
+
+  <!-- Run the joint_state_publisher GUI -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  
+  <!-- Run the robot_state_publisher -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  
+  <!-- Launch RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find color_target_tracker)/actuator.rviz" required="true"/>
+</launch>

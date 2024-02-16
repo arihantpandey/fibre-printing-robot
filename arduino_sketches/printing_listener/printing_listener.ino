@@ -3,17 +3,24 @@
 #include <Servo.h>
 #include <AccelStepper.h>
 
+
+// Define pin connections
+const int dirPin = 2;
+const int stepPin = 3;
+
+// Define motor interface type
+#define motorInterfaceType 1
+// Creates an instance
+AccelStepper myStepper(motorInterfaceType, stepPin, dirPin);
+
 ros::NodeHandle nh;
 
 // Initialize the servo for pitch control
 Servo pitchServo;
 
-// Initialize the stepper for elevation control
-// AccelStepper stepper(interfaceType, stepPin, dirPin);
-// For example, using driver with STEP and DIRECTION pin interface
-AccelStepper stepper(AccelStepper::DRIVER, 2, 3);
 
 void motorCommandCallback(const std_msgs::String& cmd_msg) {
+  
   String command = cmd_msg.data;
   int separatorIndex = command.indexOf(',');
 
@@ -23,20 +30,25 @@ void motorCommandCallback(const std_msgs::String& cmd_msg) {
   // Convert strings to integers
   int elevation = elevationStr.toInt();
   int pitch = pitchStr.toInt();
+  
 
-  // Placeholder for converting elevation to stepper steps
-  // Assuming 60cm max elevation corresponds to a certain number of steps (e.g., 2000 steps)
-  long steps = map(elevation, 0, 600, 0, 2000); // Map 0-60cm to 0-2000 steps
-  stepper.moveTo(steps);
-  stepper.runToPosition();
+  if (elevation != 0) {
+    Serial.println("Received command: ");
+  Serial.println(elevation);
+        // Move a fixed small amount up or down
+        myStepper.move(elevation * 200); // 50 can be changed based on your step resolution
+        while(myStepper.distanceToGo() != 0) {
+            myStepper.run();
+        }
+    }
 
   // Placeholder for converting pitch to servo angle
   // Servo expects values from 0 to 180, so map -45 to 45 degrees to 0 to 180
   int servoAngle = map(pitch, -45, 45, 0, 180);
   pitchServo.write(servoAngle);
 
-  Serial.print("Elevation steps: ");
-  Serial.print(steps);
+  Serial.print("Elevation direction: ");
+  Serial.print(elevation);
   Serial.print(", Pitch angle: ");
   Serial.println(servoAngle);
 }
@@ -44,7 +56,7 @@ void motorCommandCallback(const std_msgs::String& cmd_msg) {
 ros::Subscriber<std_msgs::String> sub("arduino/motor_commands", &motorCommandCallback);
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(57600);
   nh.initNode();
   nh.subscribe(sub);
 
@@ -52,8 +64,9 @@ void setup() {
   pitchServo.attach(9); // Attach the servo on pin 9 to the servo object
 
   // Setup stepper
-  stepper.setMaxSpeed(1000); // Set max speed, adjust as necessary
-  stepper.setAcceleration(500); // Set acceleration, adjust as necessary
+  myStepper.setMaxSpeed(1000);
+  myStepper.setAcceleration(100);
+  myStepper.setSpeed(500);
 }
 
 void loop() {

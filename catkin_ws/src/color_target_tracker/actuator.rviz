@@ -1,0 +1,36 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 84
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Status1
+      Splitter Ratio: 0.5
+    Tree Height: 667
+  - Class: rviz/Selection
+    Name: Selection
+    Property Tree Widget:
+      Expanded: ~
+      Splitter Ratio: 0.5
+    Tree Height: 667
+  - Class: rviz/Tool Properties
+    Name: Tool Properties
+    Property Tree Widget:
+      Expanded: ~
+      Splitter Ratio: 0.5
+    Tree Height: 667
+  - Class: rviz/Views
+    Name: Views
+    Property Tree Widget:
+      Expanded: ~
+      Splitter Ratio: 0.5
+    Tree Height: 667
+  - Class: rviz/Time
+    Name: Time
+    Expanded: false
+Visualizations:
+  - Class: rviz/RobotModel
+    Enabled: true
+    Name: RobotModel
+    Robot Description: robot_description

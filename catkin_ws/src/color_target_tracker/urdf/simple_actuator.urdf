@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot name="simple_actuator">
+
+  <!-- Base Link -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/> <!-- Small base for the actuator -->
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Moving Plate Link -->
+  <link name="moving_plate">
+    <visual>
+      <geometry>
+        <box size="0.05 0.2 0.01"/> <!-- Plate dimensions -->
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Prismatic Joint (allows translation along one axis) -->
+  <joint name="elevation_joint" type="prismatic">
+    <origin xyz="0 0 0.05" rpy="0 0 0"/> <!-- Positioned above the base -->
+    <parent link="base_link"/>
+    <child link="moving_plate"/>
+    <axis xyz="0 0 1"/> <!-- Translate along the Z-axis -->
+    <limit lower="0" upper="0.6" effort="1" velocity="0.1"/> <!-- Adjust as needed -->
+  </joint>
+
+</robot>
