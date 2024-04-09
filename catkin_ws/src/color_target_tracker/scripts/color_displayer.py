@@ -13,7 +13,7 @@ class ColorTargetDetector:
         self.target_pub = rospy.Publisher("/color_target/position", Point, queue_size=10)
         self.command_sub = rospy.Subscriber("/arduino/motor_commands", String, self.command_callback)
         self.bridge = CvBridge()
-        self.last_command = ""  # Attribute to store the last motor command
+        self.last_command = ""  
 
 
     def image_callback(self, msg):
@@ -26,7 +26,10 @@ class ColorTargetDetector:
         hsv = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
 
         # Define range of orange color in HSV
-        lower_orange = np.array([5, 50, 50])
+        # lower_orange = np.array([5, 50, 50])
+        # upper_orange = np.array([15, 255, 255])
+        # Adjusted range
+        lower_orange = np.array([5, 100, 100])  
         upper_orange = np.array([15, 255, 255])
 
         # Threshold the HSV image to get only orange colors
@@ -37,12 +40,8 @@ class ColorTargetDetector:
         contours = sorted(contours, key=cv2.contourArea, reverse=True)[:1]
 
         for contour in contours:
-            # Calculate bounding box
             x, y, w, h = cv2.boundingRect(contour)
-            # Draw bounding box
             cv2.rectangle(cv_image, (x, y), (x+w, y+h), (0, 255, 0), 2)
-
-            # Calculate centroid of the bounding box
             cx = x + w//2
             cy = y + h//2
             self.target_pub.publish(Point(x=cx, y=cy, z=0))
@@ -50,15 +49,14 @@ class ColorTargetDetector:
         font = cv2.FONT_HERSHEY_SIMPLEX
         cv2.putText(cv_image, "Cmd: {}".format(self.last_command), (10, 30), font, 1, (0, 0, 255), 2, cv2.LINE_AA)
 
-        # Display the resulting frame
         cv2.imshow('Color Target Detector', cv_image)
         cv2.waitKey(1)  # Add a small delay so the window can update
     
     def command_callback(self, msg):
-        self.last_command = msg.data  # Update the last command
+        self.last_command = msg.data  
 
 if __name__ == '__main__':
     rospy.init_node('color_detector', anonymous=True)
     od = ColorTargetDetector()
     rospy.spin()
-    cv2.destroyAllWindows()  # Make sure to destroy any OpenCV windows when the node is stopped
+    cv2.destroyAllWindows() 

@@ -17,11 +17,11 @@ image_center_y = image_height / 2
 
 # Sensitivity factors for elevation and pitch adjustments
 # These need to be calibrated 
-elevation_sensitivity = 1.5
+elevation_sensitivity = 2
 pitch_sensitivity = 1.0
 
-# Define an alignment threshold (e.g., 10 pixels tolerance)
-alignment_threshold = 10
+# Define an alignment threshold
+alignment_threshold = 80
 # Define servo spin duration in seconds
 servo_spin_duration = 2.0
 
@@ -30,20 +30,20 @@ def target_position_callback(data):
     # Calculate commands for camera orientation
     # elevation, pitch = calculate_camera_orientation(data.x, data.y)
     elevation,pitch = p_control_elevation(data.x, data.y)
-    
-    # Publish camera orientation commands
-    camera_command = "Elevation:{},Pitch:{}".format(elevation, pitch)
-    command_pub.publish(camera_command)
-    
-    # Calculate and publish base movement commands
-    base_command = calculate_base_movement(data.x, data.y)
-    base_command_pub.publish(base_command)
 
     if abs(elevation) < alignment_threshold:
         # Camera is aligned, trigger the servo to spin
         trigger_servo_spin(servo_spin_duration)
-
-    rospy.loginfo("Camera Cmd: %s | Base Cmd: Linear: %s, Angular: %s",
+        rospy.loginfo("SPINNING")
+    else:
+            # Publish camera orientation commands
+        camera_command = "Elevation:{},Pitch:{}".format(elevation, pitch)
+        command_pub.publish(camera_command)
+        
+        # Calculate and publish base movement commands
+        base_command = calculate_base_movement(data.x, data.y)
+        base_command_pub.publish(base_command)
+        rospy.loginfo("Camera Cmd: %s | Base Cmd: Linear: %s, Angular: %s",
                   camera_command, base_command.linear.x, base_command.angular.z)
 
 def calculate_camera_orientation(x, y):
@@ -84,7 +84,7 @@ def trigger_servo_spin(duration):
     servo_command = "SpinServo:{}".format(duration)
     # Publish the servo command
     command_pub.publish(servo_command)
-    
+
 def calculate_base_movement(x, y):
     command = Twist()
     

@@ -38,6 +38,22 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/color_target_tracker" TYPE FILE FILES "/home/fpr/fibre-printing-robot/catkin_ws/devel/include/color_target_tracker/ColorRangeConfig.h")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages/color_target_tracker" TYPE FILE FILES "/home/fpr/fibre-printing-robot/catkin_ws/devel/lib/python2.7/dist-packages/color_target_tracker/__init__.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/fpr/fibre-printing-robot/catkin_ws/devel/lib/python2.7/dist-packages/color_target_tracker/cfg")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages/color_target_tracker" TYPE DIRECTORY FILES "/home/fpr/fibre-printing-robot/catkin_ws/devel/lib/python2.7/dist-packages/color_target_tracker/cfg")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/fpr/fibre-printing-robot/catkin_ws/build/color_target_tracker/catkin_generated/installspace/color_target_tracker.pc")
 endif()
 
