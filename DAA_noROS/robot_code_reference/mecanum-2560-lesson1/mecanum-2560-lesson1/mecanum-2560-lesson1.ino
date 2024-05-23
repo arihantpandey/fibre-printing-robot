@@ -16,8 +16,8 @@
  * then stop. 
  * 
  */
-#define SPEED 80
-#define TURN_SPEED 60
+#define SPEED 1000
+#define TURN_SPEED 50
 #define speedPinR 9   //  Front Wheel PWM pin connect Right MODEL-X ENA 
 #define RightMotorDirPin1  22    //Front Right Motor direction pin 1 to Right MODEL-X IN1  (K1)
 #define RightMotorDirPin2  24   //Front Right Motor direction pin 2 to Right MODEL-X IN2   (K1)                                 
@@ -41,9 +41,9 @@ void go_advance(int speed){
 }
 void go_back(int speed){
    RL_bck(speed);
-   RR_bck(speed);
-   FR_bck(speed);
-   FL_bck(speed); 
+//   RR_bck(speed);
+//   FR_bck(speed);
+//   FL_bck(speed); 
 }
 void right_shift(int speed_fl_fwd,int speed_rl_bck ,int speed_rr_fwd,int speed_fr_bck) {
   FL_fwd(speed_fl_fwd); 
@@ -181,7 +181,7 @@ void setup()
   init_GPIO();
  
 go_advance(SPEED);
-     delay(1000);
+     delay(10000);
      stop_Stop();
      delay(1000);
   
@@ -190,25 +190,25 @@ go_back(SPEED);
       stop_Stop();
       delay(1000);
 	  
-left_turn(TURN_SPEED);
-      delay(1000);
-      stop_Stop();
-      delay(1000);
-	  
-right_turn(TURN_SPEED);
-     delay(1000);
-     stop_Stop();
-     delay(1000);
-  
-right_shift(SPEED*1.5, SPEED*1.5, SPEED*1.5, SPEED*1.5); //right shift
-     delay(1000);
-     stop_Stop();
-     delay(1000);
-
-left_shift(SPEED*1.5, SPEED*1.5, SPEED*1.5, SPEED*1.5); //right shift
-     delay(1000);
-     stop_Stop();
-     delay(1000);
+//left_turn(TURN_SPEED);
+//      delay(1000);
+//      stop_Stop();
+//      delay(1000);
+//	  
+//right_turn(TURN_SPEED);
+//     delay(1000);
+//     stop_Stop();
+//     delay(1000);
+//  
+//right_shift(SPEED*1.5, SPEED*1.5, SPEED*1.5, SPEED*1.5); //right shift
+//     delay(1000);
+//     stop_Stop();
+//     delay(1000);
+//
+//left_shift(SPEED*1.5, SPEED*1.5, SPEED*1.5, SPEED*1.5); //right shift
+//     delay(1000);
+//     stop_Stop();
+//     delay(1000);
 	 
 //left_shift(200,0,200,0); //left diagonal back
 //     delay(1000);
@@ -232,4 +232,33 @@ left_shift(SPEED*1.5, SPEED*1.5, SPEED*1.5, SPEED*1.5); //right shift
 }
 
 void loop(){
+  go_advance(SPEED);
+     delay(1000);
+     stop_Stop();
+     delay(1000);
+  
+go_back(SPEED);
+      delay(1000);
+      stop_Stop();
+      delay(1000);
+    
+//left_turn(TURN_SPEED);
+//      delay(1000);
+//      stop_Stop();
+//      delay(1000);
+//    
+//right_turn(TURN_SPEED);
+//     delay(1000);
+//     stop_Stop();
+//     delay(1000);
+//  
+//right_shift(SPEED*1.5, SPEED*1.5, SPEED*1.5, SPEED*1.5); //right shift
+//     delay(1000);
+//     stop_Stop();
+//     delay(1000);
+//
+//left_shift(SPEED*1.5, SPEED*1.5, SPEED*1.5, SPEED*1.5); //right shift
+//     delay(1000);
+//     stop_Stop();
+//     delay(1000);
 }

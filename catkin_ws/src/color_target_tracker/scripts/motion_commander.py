@@ -107,6 +107,6 @@ def calculate_base_movement(x, y):
     return command
 
 if __name__ == '__main__':
-    rospy.init_node('motion_commander', anonymous=True)
+    rospy.init_node('motion_planner', anonymous=True)
     rospy.Subscriber("/color_target/position", Point, target_position_callback)
     rospy.spin()

@@ -1,5 +1,6 @@
 #include <ros.h>
 #include <std_msgs/String.h>
+#include <std_msgs/Bool.h>
 #include <Servo.h>
 #include <AccelStepper.h>
 
@@ -17,9 +18,13 @@ ros::NodeHandle nh;
 Servo printServo;
 Servo pitchServo;
 
-
 int lastPitch = 45;
 
+std_msgs::Bool upper_limit_msg;
+std_msgs::Bool lower_limit_msg;
+
+ros::Publisher upper_limit_pub("/actuator_upper_limit_switch", &upper_limit_msg);
+ros::Publisher lower_limit_pub("/actuator_lower_limit_switch", &lower_limit_msg);
 
 void applyPitch() {
     // Clamp the pitch to ensure it stays within the range of 10 to 80 degrees
@@ -30,6 +35,11 @@ void applyPitch() {
 void checkAndMoveStepper(int elevation) {
     bool atUpperLimit = digitalRead(upperLimitSwitchPin) == LOW;
     bool atLowerLimit = digitalRead(lowerLimitSwitchPin) == LOW;
+
+    upper_limit_msg.data = atUpperLimit;
+    lower_limit_msg.data = atLowerLimit;
+    upper_limit_pub.publish(&upper_limit_msg);
+    lower_limit_pub.publish(&lower_limit_msg);
 
     if ((elevation > 0 && !atUpperLimit) || (elevation < 0 && !atLowerLimit)) {
         myStepper.move(elevation);
@@ -68,8 +78,7 @@ void motorCommandCallback(const std_msgs::String &cmd_msg) {
     }
 }
 
-
-ros::Subscriber<std_msgs::String> sub("actuator_arduino/motor_commands", &motorCommandCallback);
+ros::Subscriber<std_msgs::String> sub("/actuator_motor_commands", &motorCommandCallback);
 
 void setup() {
     pinMode(upperLimitSwitchPin, INPUT);
@@ -79,6 +88,8 @@ void setup() {
     Serial.begin(57600);
     nh.initNode(); 
     nh.subscribe(sub);
+    nh.advertise(upper_limit_pub);
+    nh.advertise(lower_limit_pub);
     pitchServo.attach(pitchServoPin);
     pitchServo.write(45);
     printServo.attach(11);
@@ -89,4 +100,5 @@ void setup() {
 
 void loop() {
     nh.spinOnce();
+    delay(10);  // Add a small delay to avoid flooding the ROS topic
 }
