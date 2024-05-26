@@ -50,7 +50,7 @@ class ColorTargetDetector:
         cv2.putText(cv_image, "Cmd: {}".format(self.last_command), (10, 30), font, 1, (0, 0, 255), 2, cv2.LINE_AA)
 
         cv2.imshow('Color Target Detector', cv_image)
-        cv2.waitKey(1)  # Add a small delay so the window can update
+        cv2.waitKey(1) 
     
     def command_callback(self, msg):
         self.last_command = msg.data  

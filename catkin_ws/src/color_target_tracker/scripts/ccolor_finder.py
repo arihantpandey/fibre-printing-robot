@@ -7,7 +7,7 @@ import os
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 from geometry_msgs.msg import Point
-from std_msgs.msg import Float32  # Import Float32 for the distance measurements
+from std_msgs.msg import Float32  
 import dynamic_reconfigure.server
 from color_target_tracker.cfg import ColorRangeConfig
 
@@ -17,7 +17,7 @@ class ColorTargetDetector:
         self.server = dynamic_reconfigure.server.Server(ColorRangeConfig, self.config_callback)
         self.target_pub = rospy.Publisher("/color_target_position", Point, queue_size=10)
         self.bridge = CvBridge()
-        self.last_distance = 0.0  # Attribute to store the last distance reading
+        self.last_distance = 0.0  
 
     def load_hsv_range(self):
         script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -60,7 +60,7 @@ class ColorTargetDetector:
         cv2.waitKey(3)
 
     def distance_callback(self, msg):
-        self.last_distance = msg.data  # Update the last distance
+        self.last_distance = msg.data  
 
 if __name__ == '__main__':
     rospy.init_node('image_processor', anonymous=True)

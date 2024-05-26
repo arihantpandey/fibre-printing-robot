@@ -27,8 +27,6 @@ servo_spin_duration = 2.0
 
 
 def target_position_callback(data):
-    # Calculate commands for camera orientation
-    # elevation, pitch = calculate_camera_orientation(data.x, data.y)
     elevation,pitch = p_control_elevation(data.x, data.y)
 
     if abs(elevation) < alignment_threshold:
@@ -66,9 +64,6 @@ def calculate_camera_orientation(x, y):
     elif elevation_error < -height_tolerance:
         # Target is below the middle third, move the actuator up
         elevation_change = 1
-    
-    # Assuming pitch control is not needed for this example
-    # If it was needed, you could implement a similar logic based on width_tolerance
 
     return elevation_change, pitch_change
 
@@ -88,7 +83,6 @@ def trigger_servo_spin(duration):
 def calculate_base_movement(x, y):
     command = Twist()
     
-    # Simplified logic to orient and approach the target
     if x < image_width / 4:
         command.angular.z = 0.5  # Rotate left
     elif x > 3 * image_width / 4:
@@ -102,8 +96,6 @@ def calculate_base_movement(x, y):
         command.linear.x = -0.5  # Move backward
     else:
         command.linear.x = 0  # Stop moving if at an ideal distance
-    
-    # Adjust these values based on your robot's specific capabilities and testing
     return command
 
 if __name__ == '__main__':

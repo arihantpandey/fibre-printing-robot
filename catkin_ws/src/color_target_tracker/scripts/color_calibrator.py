@@ -22,17 +22,16 @@ class ColorCalibrator:
         self.hsv_range["upper"] = [config.upper_hue, config.upper_saturation, config.upper_value]
 
     def save_hsv_range_to_file(self):
-        # Construct the file path to save in the cfg directory
-        script_dir = os.path.dirname(os.path.realpath(__file__))  # Absolute path to the current script
-        cfg_dir_path = os.path.join(script_dir, '..', 'cfg')  # Navigate up to the parent, then to the cfg directory
-        cfg_dir_path = os.path.abspath(cfg_dir_path)  # Get the absolute path to the cfg directory
+        script_dir = os.path.dirname(os.path.realpath(__file__))  
+        cfg_dir_path = os.path.join(script_dir, '..', 'cfg')  
+        cfg_dir_path = os.path.abspath(cfg_dir_path)  
         
         # Ensure the cfg directory exists
         if not os.path.exists(cfg_dir_path):
             os.makedirs(cfg_dir_path)
         
-        file_path = os.path.join(cfg_dir_path, 'hsv_range.yaml')  # Full path to the hsv_range.yaml file
-
+        file_path = os.path.join(cfg_dir_path, 'hsv_range.yaml')  #
+        
         # Write the HSV range to the YAML file
         with open(file_path, 'w') as file:
             yaml.dump(self.hsv_range, file, default_flow_style=False)

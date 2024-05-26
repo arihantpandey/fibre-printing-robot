@@ -25,8 +25,8 @@ vfov_degrees = math.degrees(vfov)
 # Pixels per degree calculation
 pixels_per_degree = image_height / vfov_degrees
 
-# Distance to the object (in meters)
-distance_to_object = 0.3  # 30 cm for better understanding, adjust as needed
+# Distance to the object
+distance_to_object = 0.3 
 
 # Sensitivity factors for elevation and pitch adjustments
 elevation_sensitivity = 2
