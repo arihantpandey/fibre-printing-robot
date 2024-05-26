@@ -8,7 +8,7 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 from geometry_msgs.msg import Point
 from std_msgs.msg import String
-from std_msgs.msg import Float32  # Import Float32 for the distance measurements
+from std_msgs.msg import Float32  
 import dynamic_reconfigure.server
 from color_target_tracker.cfg import ColorRangeConfig
 
@@ -21,9 +21,9 @@ class ColorTargetDetector:
         self.base_command_sub = rospy.Subscriber("/base_motor_commands", String, self.base_command_callback)
         self.distance_sub = rospy.Subscriber("/ultrasonic_distance", Float32, self.distance_callback)
         self.bridge = CvBridge()
-        self.last_actuator_command = ""  # Attribute to store the last actuator command
-        self.last_base_command = ""      # Attribute to store the last base command
-        self.last_distance = 0.0         # Attribute to store the last distance reading
+        self.last_actuator_command = "" 
+        self.last_base_command = ""      
+        self.last_distance = 0.0         
 
     def load_hsv_range(self):
         script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -65,7 +65,6 @@ class ColorTargetDetector:
         else:
             self.target_pub.publish(Point(x=0, y=0, z=0))
 
-        # Display the last commands and distance
         cv2.putText(cv_image, "Actuator Cmd: {}".format(self.last_actuator_command), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
         cv2.putText(cv_image, "Base Cmd: {}".format(self.last_base_command), (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
         cv2.putText(cv_image, "Distance: {:.2f} cm".format(self.last_distance), (10, 110), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
@@ -80,7 +79,7 @@ class ColorTargetDetector:
         self.last_base_command = msg.data
 
     def distance_callback(self, msg):
-        self.last_distance = msg.data  # Update the last distance
+        self.last_distance = msg.data  
 
 if __name__ == '__main__':
     rospy.init_node('image_processor', anonymous=False)

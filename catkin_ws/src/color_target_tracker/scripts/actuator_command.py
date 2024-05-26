@@ -3,7 +3,6 @@ import rospy
 from geometry_msgs.msg import Point
 from std_msgs.msg import String
 
-# Initialize a publisher to send commands to Arduino
 command_pub = rospy.Publisher('/arduino/motor_commands', String, queue_size=10)
 
 # dimensions of the image
