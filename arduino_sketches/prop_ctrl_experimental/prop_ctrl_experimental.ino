@@ -27,7 +27,6 @@ ros::Publisher upper_limit_pub("/actuator_upper_limit_switch", &upper_limit_msg)
 ros::Publisher lower_limit_pub("/actuator_lower_limit_switch", &lower_limit_msg);
 
 void applyPitch() {
-    // Clamp the pitch to ensure it stays within the range of 10 to 80 degrees
     int clampedPitch = constrain(lastPitch, 10, 80);
     pitchServo.write(clampedPitch);
 }
@@ -47,7 +46,7 @@ void checkAndMoveStepper(int elevation) {
         myStepper.move(elevation);
         myStepper.runToPosition();
     } else {
-        applyPitch();  // Apply the last known pitch command when the limit is reached
+        applyPitch(); 
         delay(2000);
     }
 }
@@ -62,21 +61,20 @@ void motorCommandCallback(const std_msgs::String &cmd_msg) {
         delay(duration);
         printServo.writeMicroseconds(1500);
         digitalWrite(pumpPin, LOW);
-        // pitchServo.write(45);
         
     } else if (command.startsWith("Elevation:")) {
         int commaIndex = command.indexOf(',');
         String elevationStr = command.substring(10, commaIndex);
         String pitchStr = command.substring(command.indexOf("Pitch:") + 6);
 
-        // Use ROS logging to print debug information
+        
         nh.loginfo(("ElevationStr: " + elevationStr).c_str());
         nh.loginfo(("PitchStr: " + pitchStr).c_str());
 
         int elevation = elevationStr.toInt();
         lastPitch = pitchStr.toInt();  
         checkAndMoveStepper(elevation);
-        nh.loginfo(("Received Elevation: " + String(elevation) + ", Pitch: " + String(lastPitch)).c_str());  // Log the received elevation and pitch values
+        nh.loginfo(("Received Elevation: " + String(elevation) + ", Pitch: " + String(lastPitch)).c_str());  
     }
 }
 
@@ -102,5 +100,5 @@ void setup() {
 
 void loop() {
     nh.spinOnce();
-    delay(10);  // Add a small delay to avoid flooding the ROS topic
+    delay(10);  
 }

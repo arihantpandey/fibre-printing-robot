@@ -29,9 +29,6 @@ int flag = 0;
 
 std_msgs::Float32 distance_msg;
 ros::Publisher pub_distance("/ultrasonic_distance", &distance_msg);
-// Define the callback function for the command subscriber
-
-
 
 float getDistance()
 {
@@ -47,7 +44,8 @@ float getDistance()
 void adjust_distance(float target_distance)
 {
     while (abs(getDistance() - target_distance) > 2)
-    { // Allow 2 cm tolerance
+    {
+        // Allow 2 cm tolerance
         if (getDistance() > target_distance)
         {
             All_Motors_Backward(100);
@@ -106,20 +104,18 @@ void All_Motors_Brake()
 
 void Strafe_Right(int Speed)
 {
-    Motor_Backward(IN1_1, IN2_1, ENA_1, Speed); // Front Left Backward
+    Motor_Backward(IN1_1, IN2_1, ENA_1, Speed); // Rear Right Backward
     Motor_Forward(IN3_1, IN4_1, ENB_1, Speed);  // Rear Left Forward
-    Motor_Backward(IN3_2, IN4_2, ENB_2, Speed); // Rear Right Backward
+    Motor_Backward(IN3_2, IN4_2, ENB_2, Speed); // Front Left Backward
     Motor_Forward(IN1_2, IN2_2, ENA_2, Speed);  // Front Right Forward
 }
 
 void Strafe_Left(int Speed)
 {
-    Motor_Forward(IN1_1, IN2_1, ENA_1, Speed);  // Front Left Forward
+    Motor_Forward(IN1_1, IN2_1, ENA_1, Speed);  // Rear Right Backward
     Motor_Backward(IN3_1, IN4_1, ENB_1, Speed); // Rear Left Backward
-    Motor_Forward(IN3_2, IN4_2, ENB_2, Speed);  // Rear Right Forward
+    Motor_Forward(IN3_2, IN4_2, ENB_2, Speed);  // Front Left Backward
     Motor_Backward(IN1_2, IN2_2, ENA_2, Speed); // Front Right Backward
-
-    
 }
 void commandCallback(const std_msgs::String &cmd_msg)
 {
@@ -174,7 +170,7 @@ void setup()
     pinMode(ENB_2, OUTPUT);
     pinMode(trigPin, OUTPUT);
     pinMode(echoPin, INPUT);
-    
+
     nh.initNode();
     nh.advertise(pub_distance);
     nh.subscribe(sub);
@@ -182,13 +178,14 @@ void setup()
 
 void loop()
 {
-    if(!flag) {
+    if (!flag)
+    {
         adjust_distance(50);
         flag = 1;
     }
-     float distance = getDistance();
-     distance_msg.data = distance;
-     pub_distance.publish(&distance_msg);
+    float distance = getDistance();
+    distance_msg.data = distance;
+    pub_distance.publish(&distance_msg);
 
     nh.spinOnce();
     delay(200);

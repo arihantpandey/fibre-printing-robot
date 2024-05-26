@@ -10,7 +10,7 @@
         <param name="framerate" value="30" />
     </node>
 
-    <!-- Color Target Detector Node -->
+    <!-- Colour Target Detector Node -->
     <node name="image_processor" pkg="color_target_tracker" type="color_detector.py" output="log" />
 
     <!-- Motion Commander Node -->

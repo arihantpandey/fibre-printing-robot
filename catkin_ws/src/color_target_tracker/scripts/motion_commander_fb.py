@@ -28,7 +28,7 @@ hfov_degrees = math.degrees(hfov)
 pixels_per_degree_vfov = image_height / vfov_degrees
 pixels_per_degree_hfov = image_width / hfov_degrees
 
-# Distance to the object (in meters)
+# Distance to the object (in cm)
 distance_to_object = 30  # Initial value, will be updated from the ultrasonic sensor
 
 # Sensitivity factors for elevation and pitch adjustments
@@ -100,41 +100,39 @@ def target_position_callback(data):
         # Calculate and publish base movement commands to keep the target in center
         lateral_flag = calculate_base_movement(data.x, data.y)
 
-# # Lateral tolerance (in meters)
 
-# lateral_flag = False
-# enhanced = False
-# def target_position_callback(data):
-#     global distance_to_object
-#     global lateral_flag
-#     global enhanced
-#     global switch_triggered
-#     # Calculate commands for camera orientation
-#     elevation, pitch = p_control_pitch(data.x, data.y, distance_to_object)
+lateral_flag = False
+enhanced = False
+def target_position_callback(data):
+    global distance_to_object
+    global lateral_flag
+    global enhanced
+    global switch_triggered
+    # Calculate commands for camera orientation
+    elevation, pitch = p_control_pitch(data.x, data.y, distance_to_object)
 
-#     if enhanced and lateral_flag and (abs(elevation) < alignment_threshold):
-#         # Camera is aligned, move base first then trigger the servo to spin
-        
-#         base_command_pub.publish("set_distance:15")  
-#         rospy.sleep(3)
-#         trigger_servo_spin(servo_spin_duration) 
-#         # enhanced=False
-#     elif lateral_flag and (abs(elevation) < alignment_threshold):
-#         base_command_pub.publish("set_distance:30")
-#         rospy.sleep(3)
-#         enhanced = True
-#         elevation, pitch = p_control_pitch(data.x, data.y, 0.3)
-#         rospy.loginfo(camera_command)
-#         command_pub.publish(camera_command)
-#         rospy.sleep(3)
-#     elif lateral_flag:
-#         # Publish camera orientation commands
-#         camera_command = "Elevation:{},Pitch:{}".format(elevation, pitch)
-#         rospy.loginfo(camera_command)
-#         command_pub.publish(camera_command)
-#     else:
-#         # Calculate and publish base movement commands to keep the target in center
-#         lateral_flag = calculate_base_movement(data.x, data.y)
+    if enhanced and lateral_flag and (abs(elevation) < alignment_threshold):
+        # Camera is aligned, move base first then trigger the servo to spin
+        base_command_pub.publish("set_distance:15")  
+        rospy.sleep(3)
+        trigger_servo_spin(servo_spin_duration) 
+        # enhanced=False
+    elif lateral_flag and (abs(elevation) < alignment_threshold):
+        base_command_pub.publish("set_distance:30")
+        rospy.sleep(3)
+        enhanced = True
+        elevation, pitch = p_control_pitch(data.x, data.y, 0.3)
+        rospy.loginfo(camera_command)
+        command_pub.publish(camera_command)
+        rospy.sleep(3)
+    elif lateral_flag:
+        # Publish camera orientation commands
+        camera_command = "Elevation:{},Pitch:{}".format(elevation, pitch)
+        rospy.loginfo(camera_command)
+        command_pub.publish(camera_command)
+    else:
+        # Calculate and publish base movement commands to keep the target in center
+        lateral_flag = calculate_base_movement(data.x, data.y)
 
 def p_control_pitch(x, y, distance):
     # Calculate pitch based on vertical pixel offset, VFOV, and distance
@@ -180,8 +178,6 @@ def calculate_base_movement(x, y):
         rospy.loginfo(strafe_command)
         base_command_pub.publish(strafe_command)
         return False
-        # Wait for the strafe to complete
-        # rospy.sleep(strafe_time)
 
 def upper_limit_switch_callback(data):
     rospy.loginfo("Upper limit switch status: {}".format(data.data))
@@ -197,7 +193,7 @@ def lower_limit_switch_callback(data):
 
 def ultrasonic_sensor_callback(data):
     global distance_to_object
-    distance_to_object = data.data  # Update the distance to the object
+    distance_to_object = data.data  
 
 if __name__ == '__main__':
     rospy.init_node('motion_planner', anonymous=False)
